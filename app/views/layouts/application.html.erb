@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kickcompare</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="site-wrapper">
+
+  <div class="site-wrapper-inner">
+
+    <div class="cover-container">
+
+      <div class="masthead clearfix">
+        <div class="inner">
+          <nav><h3 class="masthead-brand"><%=link_to "Kick Compare", root_path %></h3></nav>
+          <nav>
+            <ul class="nav masthead-nav">
+              <% if admin_signed_in? %>
+                  <li><%= link_to "Kicks", kicks_path%></li>
+                  <li><%= link_to "Retailers", retailers_path%></li>
+                  <li><%= link_to "Offers", offers_path%></li>
+              <li><%=link_to " #{current_admin.email}", edit_admin_registration_path %></li>
+              <%end%>
+                  </ul>
+          </nav>
+        </div>
+      </div>
+
+      <% unless notice.nil? or alert.nil? %>
+      <div class="inner cover module_box">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      </div>
+      <%end%>
+
+      <div class="inner cover module_box main_content">
+        <div class="nudge-padding">
+        <%= yield %>
+        </div>
+      </div>
+
+      <div class="mastfoot">
+        <div class="inner">
+          <Nav>
+
+            <% if admin_signed_in? %>
+
+                  <%= link_to('Logout', destroy_admin_session_path, :method => :delete) %>
+
+            <% else %>
+
+                  <%= link_to('Admin Login', new_admin_session_path)  %>
+
+            <% end %>
+
+            </Nav>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</body>
+</html>
